@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "build": "cd android && ./gradlew assembleRelease"
+    "build-android": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "jest-cli": "^22.0.6",
