@@ -22,7 +22,6 @@ class App extends Component {
   readFromClipboard = async () => {   
     const content = await Clipboard.getString();
     if (digitsPattern.test(content)) {
-      console.log("true ")
       this.setState({
         clipboardContent: content,
       })
@@ -45,7 +44,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(JSON.stringify(this.state))
     return (
       <View>
         <Toolbar toolbarStyles={styles.toolbar}
