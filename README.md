@@ -26,6 +26,13 @@ react-native run-ios
 
 ### For android
 
+Add the following keystore properties to gradle.properties to make a release build
+
+MYAPP_RELEASE_STORE_FILE=  
+MYAPP_RELEASE_KEY_ALIAS=  
+MYAPP_RELEASE_STORE_PASSWORD=  
+MYAPP_RELEASE_KEY_PASSWORD=  
+
 ```
 npm run build-android
 ```
