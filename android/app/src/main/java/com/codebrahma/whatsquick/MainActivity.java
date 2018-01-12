@@ -1,4 +1,4 @@
-package com.codebrahma;
+package com.codebrahma.whatsquick;
 
 import com.facebook.react.ReactActivity;
 
