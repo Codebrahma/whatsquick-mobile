@@ -14,17 +14,18 @@ class App extends Component {
   render() {
     return (
       <View>
-        <Toolbar toolbarStyles={ styles.toolbar }
-        toolbarTitleStyles={ styles.title }
+        <Toolbar toolbarStyles={styles.toolbar}
+          toolbarTitleStyles={styles.title}
           title="WhatsQuick" />
-        <View style={{padding: 10}}>
+        <View style={{ padding: 10 }}>
           <TextInput
-            style={{ height: 40 }}
+            style={[{ height: 40 }, styles.formFieldContainer]}
+            underlineColorAndroid='transparent'
             placeholder="Enter number with country code" keyboardType="phone-pad"
             onChangeText={(text) => this.setState({ text })}
           />
           <Button
-            onPress={() => { Linking.openURL('https://api.whatsapp.com/send?phone='+this.state.text) }
+            onPress={() => { Linking.openURL('https://api.whatsapp.com/send?phone=' + this.state.text) }
             }
             title="Send Message"
           />
@@ -35,31 +36,22 @@ class App extends Component {
 }
 
 const baseStyles = {
-	container: {
-		flex: 1,
-    backgroundColor:'#F2F2F2',
-    
-	},
-	title: {
-		color: '#579adf',
+  title: {
+    color: '#579adf',
     textAlign: 'center',
-		fontSize: 20
-	},
-	toolbar: {
+    fontSize: 20
+  },
+  toolbar: {
     backgroundColor: '#FFFFFF',
     height: 50
   },
-  tabbar: {
-    backgroundColor:'#FFFFFF',
-  },
-  selectedTabStyle: {
-		backgroundColor: '#F2F2F2',
-		borderColor: '#579adf',
-		borderTopWidth: 1
-  },
-  iconStyle: {
-    width: 25,
-    height:25
+  formFieldContainer: {
+    elevation: 1.5,
+    marginTop: 20,
+    borderRadius: 3,
+    backgroundColor: '#F2F2F2',
+    marginBottom: 20,
+    padding: 5
   }
 }
 const styles = StyleSheet.create(baseStyles);
