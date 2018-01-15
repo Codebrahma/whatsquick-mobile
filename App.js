@@ -3,7 +3,7 @@ import { View, TextInput, Linking, Button, StyleSheet, Clipboard, ToastAndroid }
 import Toolbar from './toolbar';
 
 const phoneNumberPattern = '/^[\+]/^\d+$/'
-const digitsPattern = /^\d+$/
+const digitsPattern = /^\+?(([0-9]+[-. ]*[0-9]+)+)+$/
 
 class App extends Component {
   constructor(props) {
