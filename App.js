@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, TextInput, Linking, Button, StyleSheet, Clipboard, ToastAndroid } from 'react-native'
+import { View, TextInput, Linking, Button, StyleSheet, Clipboard, ToastAndroid, Text } from 'react-native'
 import Toolbar from './toolbar';
 
 const phoneNumberPattern = '/^[\+]/^\d+$/'
-const digitsPattern = /^\+?(([0-9]+[-. ]*[0-9]+)+)+$/
+const digitsPattern = /^\+?(([0-9]+[-. ]*[0-9]*)+)+$/
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class App extends Component {
     this.readFromClipboard();
   }
 
-  readFromClipboard = async () => {   
+  readFromClipboard = async () => {
     const content = await Clipboard.getString();
     if (digitsPattern.test(content)) {
       this.setState({
@@ -29,7 +29,7 @@ class App extends Component {
   };
 
   pasteFromCBText = async () => {
-    const content = await Clipboard.getString();   
+    const content = await Clipboard.getString();
     if (digitsPattern.test(content)) {
       this.setState({
         clipboardContent: content,
@@ -40,7 +40,7 @@ class App extends Component {
       this.setState({
         clipboardContent: ''
       })
-    }  
+    }
   }
 
   render() {
@@ -50,27 +50,25 @@ class App extends Component {
           toolbarTitleStyles={styles.title}
           title="WhatsQuick" />
         <View style={{ padding: 10 }}>
-        <View style={ styles.inputContainer }>
-          
-          <TextInput
-            style={[styles.formFieldContainer]}
-            autoFocus={true}  
-            underlineColorAndroid='transparent'
-            placeholder="Enter number with country code" keyboardType="phone-pad"
-            value={this.state.inputText}
-            onChangeText={(inputText) => this.setState({ inputText })}
-          />
-            <Button   
-              onPress={ this.pasteFromCBText }
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={[styles.formFieldContainer]}
+              autoFocus={true}
+              underlineColorAndroid='transparent'
+              placeholder="Enter number with country code" keyboardType="phone-pad"
+              value={this.state.inputText}
+              onChangeText={(inputText) => this.setState({ inputText })}
+            />
+            <Button
+              onPress={this.pasteFromCBText}
               title="Paste"
             />
-            </View>
-          <View style={ styles.buttonsContainer }>
-            
+          </View>
+          {this.state.inputText ? <Text style={{ fontSize: 10, color: '#AEAEAE' }}>Enter number with country code. Ex: +918988989888</Text> : <View />}
+          <View style={styles.buttonsContainer}>
             <Button
-              disabled={this.state.inputText === ''}  
-              onPress={() => { Linking.openURL('https://api.whatsapp.com/send?phone=' + this.state.inputText) }
-              }
+              disabled={!digitsPattern.test(this.state.inputText)}
+              onPress={() => { Linking.openURL('https://api.whatsapp.com/send?phone=' + this.state.inputText) }}
               title="Send Message"
             />
           </View>
@@ -102,7 +100,9 @@ const baseStyles = {
   inputContainer: {
     flexDirection: 'row',
     marginTop: 10,
-    marginBottom: 10    
+  },
+  buttonsContainer: {
+    marginTop: 5
   }
 }
 const styles = StyleSheet.create(baseStyles);
